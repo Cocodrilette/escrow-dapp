@@ -12,9 +12,13 @@ contract Manager {
         address _arbiter,
         address _beneficiary
     ) public payable {
-        Escrow escrow = new Escrow{value: msg.value}(_arbiter, _beneficiary);
+        Escrow escrow = new Escrow{value: msg.value}(
+            _arbiter,
+            _beneficiary,
+            msg.sender
+        );
 
-        contractsByOwner[msg.sender].push(address(escrow));
+        contractsByOwner[_arbiter].push(address(escrow));
 
         emit NewEscrowCreated(address(escrow));
     }

@@ -1,5 +1,5 @@
 {
-  "address": "0x4D2B6d17ff4f70710741467390FA6125e72c4Fcc",
+  "address": "0x786B9eD753482888D7b3EeDc5FA4BEB999A6ba61",
   "abi": [
     {
       "inputs": [
@@ -11,6 +11,11 @@
         {
           "internalType": "address",
           "name": "_beneficiary",
+          "type": "address"
+        },
+        {
+          "internalType": "address",
+          "name": "_depositer",
           "type": "address"
         }
       ],
@@ -53,6 +58,19 @@
     {
       "inputs": [],
       "name": "beneficiary",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "depositer",
       "outputs": [
         {
           "internalType": "address",

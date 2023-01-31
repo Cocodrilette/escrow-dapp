@@ -1,9 +1,6 @@
 import { Dispatch, SyntheticEvent, useReducer, useState } from "react";
-import { CiCircleAlert } from "react-icons/ci";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-// import { parseEther } from "ethers/lib/utils.js";
-
-import { ManagerContractComponentProps } from "./Contract";
+import { ContractComponentProps } from "../Contracts";
 
 type CreateContractReducer = [
   { arbiter: string; beneficiary: string; amount: string },
@@ -13,7 +10,7 @@ type CreateContractReducer = [
 export default function CreateContract({
   createNewEscrow,
   getContractsByOwner,
-}: ManagerContractComponentProps) {
+}: ContractComponentProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [addressInputError, setAddressInputError] = useState(false);
   const [event, updateEvent]: CreateContractReducer = useReducer(
@@ -29,6 +26,9 @@ export default function CreateContract({
       setIsLoading(true);
       await createNewEscrow?.(event.arbiter, event.beneficiary, event.amount);
       await getContractsByOwner?.();
+
+      updateEvent({ arbiter: "", beneficiary: "", amount: "" });
+
       setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
@@ -52,8 +52,8 @@ export default function CreateContract({
   };
 
   return (
-    <div className="border rounded-md">
-      <h1 className="text-3xl font-bold font-mono border-b my-5 text-center">
+    <div className="border-2 rounded-md w-full m-h-fit">
+      <h1 className="text-3xl font-bold font-mono border-b-2 my-5 text-center">
         Create Escrow
       </h1>
       <form className="flex flex-col gap-5 p-5">
@@ -63,6 +63,7 @@ export default function CreateContract({
             className="address border rounded-sm p-2"
             type="text"
             name="arbiter"
+            value={event.arbiter}
             placeholder="0xf39Fd6e51aad88F6F4aSce6aB..."
             onChange={(e) => {
               handleOnChange(e);
@@ -77,6 +78,7 @@ export default function CreateContract({
             className="address border rounded-sm p-2"
             type="text"
             name="beneficiary"
+            value={event.beneficiary}
             placeholder="0x8F4ce6aB8827279cffFb92266..."
             onChange={(e) => {
               handleOnChange(e);
@@ -92,17 +94,15 @@ export default function CreateContract({
             type="text"
             name="amount"
             placeholder="0.5"
+            value={event.amount}
             onChange={(e) => {
               handleOnChange(e);
               updateEvent({ amount: e.target.value });
             }}
           />
-          <small className="flex gap-1 items-center">
-            <CiCircleAlert /> Amount in Wei
-          </small>
         </div>
         <button
-          className="transition-all duration-300 bg-[#4ae5e5] p-2 text-black hover:rounded-xl"
+          className="transition-all duration-300 bg-green-400 px-3 py-1 border-2 border-green-700 text-black rounded-sm hover:rounded-xl"
           onClick={(e) => handleSubmit(e)}
           disabled={isLoading}
         >

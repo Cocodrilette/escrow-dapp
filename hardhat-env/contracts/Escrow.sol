@@ -4,12 +4,18 @@ pragma solidity 0.8.17;
 contract Escrow {
     address public arbiter;
     address public beneficiary;
+    address public depositer;
 
     bool public isApproved;
 
-    constructor(address _arbiter, address _beneficiary) payable {
+    constructor(
+        address _arbiter,
+        address _beneficiary,
+        address _depositer
+    ) payable {
         arbiter = _arbiter;
         beneficiary = _beneficiary;
+        depositer = _depositer;
     }
 
     event Approved(uint);

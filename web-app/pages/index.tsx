@@ -1,8 +1,6 @@
 import Head from "next/head";
-// import useAppContext from "../hooks/AppContext";
-// import { AppContext } from "../hooks/AppContext";
 import Header from "../components/Header";
-import Contract from "../components/Contracts/Escrow/Contract";
+import Contracts from "../components/Contracts/Contracts";
 import { useAccount } from "wagmi";
 import NotConnectedMessage from "@/components/NotConnectedMessage";
 
@@ -11,7 +9,7 @@ export default function Home() {
 
   const render = () => {
     if (isConnected) {
-      return <Contract />;
+      return <Contracts />;
     } else {
       return <NotConnectedMessage />;
     }

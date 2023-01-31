@@ -24,7 +24,7 @@ export const AppContextProvider = ({ children }: any) => {
 
   useEffect(() => {
     web3ModalRef.current = new Web3Modal({
-      network: "goerli",
+      network: "mumbai",
       providerOptions: {},
       disableInjectedProvider: false,
     });
